@@ -1,0 +1,172 @@
+# 🚀 Application Web de Gestion de Recrutement
+
+## 📚 Description
+
+Cette application web a pour objectif de permettre à une entreprise de :
+
+* publier des offres d'emploi,
+* recevoir et gérer des candidatures,
+* télécharger les CV des postulants,
+* filtrer et trier les candidatures.
+
+Elle dispose :
+
+* d’un **espace administrateur sécurisé** pour gérer les offres et consulter les candidatures,
+* d’un **espace candidat** permettant de consulter les offres et postuler en ligne via un formulaire avec upload de CV.
+
+Ce projet a été réalisé pour démontrer mes compétences en **développement web fullstack** (HTML, CSS, JavaScript, PHP, MySQL) et en **gestion d’un projet complet de type CRUD**.
+
+---
+
+## ✨ Fonctionnalités principales
+
+✅ Gestion des offres d’emploi :
+
+* Ajout, modification, suppression des offres
+* Filtrage par domaine (informatique, communication, etc.)
+
+✅ Gestion des candidatures :
+
+* Consultation des candidatures liées à chaque offre
+* Téléchargement du CV (fichier PDF)
+
+✅ Authentification admin :
+
+* Connexion sécurisée avec gestion des sessions PHP
+
+✅ Espace public candidat :
+
+* Liste des offres d’emploi disponibles
+* Formulaire pour postuler et envoyer un CV
+
+✅ Autres :
+
+* Interface responsive (mobile/tablette/desktop)
+* Sécurité basique (validation des inputs, upload contrôlé)
+
+---
+
+## 🛠️ Technologies utilisées
+
+| Technologie               | Usage                         |
+| ------------------------- | ----------------------------- |
+| **HTML5 / CSS3**          | Structure et style des pages  |
+| **JavaScript**            | Petites interactions          |
+| **PHP**                   | Backend et logique métier     |
+| **MySQL**                 | Base de données relationnelle |
+| **Bootstrap** (optionnel) | Pour faciliter le responsive  |
+
+---
+
+## 🗄️ Structure de la base de données
+
+```sql
+-- Table des administrateurs
+CREATE TABLE admin (
+  id_admin INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(100) NOT NULL UNIQUE,
+  mot_de_passe VARCHAR(255) NOT NULL
+);
+
+-- Table des offres d'emploi
+CREATE TABLE offres (
+  id_offre INT AUTO_INCREMENT PRIMARY KEY,
+  titre VARCHAR(255),
+  description TEXT,
+  domaine VARCHAR(100),
+  date_publication DATE
+);
+
+-- Table des candidatures
+CREATE TABLE candidatures (
+  id_candidature INT AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(100),
+  email VARCHAR(100),
+  message TEXT,
+  cv_path VARCHAR(255),
+  id_offre INT,
+  FOREIGN KEY (id_offre) REFERENCES offres(id_offre)
+);
+```
+
+---
+
+## 🚀 Installation locale
+
+### 1️⃣ Cloner le projet
+
+```bash
+git clone https://github.com/ton-utilisateur/gestion-recrutement.git
+cd gestion-recrutement
+```
+
+### 2️⃣ Configurer la base de données
+
+* Créer une base MySQL `gestion_recrutement` (ou autre nom).
+* Importer le script `database.sql` fourni.
+
+### 3️⃣ Configurer la connexion
+
+* Copier le fichier `config.example.php` en `config.php` :
+
+```php
+<?php
+$host = 'localhost';
+$db = 'gestion_recrutement';
+$user = 'root';
+$password = '';
+try {
+  $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $password);
+} catch (PDOException $e) {
+  die("Erreur de connexion : " . $e->getMessage());
+}
+?>
+```
+
+* Modifier selon vos identifiants MySQL.
+
+### 4️⃣ Lancer en local
+
+* Placer le dossier dans `htdocs` (XAMPP) ou `www` (WAMP/LAMP).
+* Accéder à `http://localhost/gestion-recrutement/` dans votre navigateur.
+
+---
+
+## 🔒 Sécurité
+
+* Les mots de passe admin sont hachés (SHA256/MD5 recommandé au minimum, mieux avec `password_hash`).
+* Les fichiers CV sont contrôlés pour n’autoriser que le PDF.
+* Prévoir une extension future avec un pare-feu applicatif (validation des requêtes POST/GET plus stricte).
+
+---
+
+## 📌 Roadmap (pour améliorations futures)
+
+* ✅ Pagination des candidatures
+* ✅ Upload avec prévisualisation
+* ❌ Envoi d'email automatique à l'entreprise à chaque nouvelle candidature
+* ❌ Tableau de bord statistique (nombre de candidatures par offre)
+
+---
+
+## 👨‍💻 Auteur
+
+**Andry Rakoto**
+[GitHub](https://github.com/andryrakoto) • [LinkedIn](https://linkedin.com/in/andryrakoto)
+*Email : [andry.rakoto@email.com](mailto:andry.rakoto@email.com)*
+
+---
+
+## ⭐ Licence
+
+Projet sous licence **MIT** — libre d’utilisation et de modification.
+
+---
+
+✅ Si tu veux, je peux aussi te faire :
+
+* le **fichier `database.sql` complet** pour la création de tes tables,
+* un **`config.php` déjà prêt**,
+* ou un **fichier `.zip` avec l’architecture PHP de départ**.
+
+Dis-moi ce que tu veux pour continuer ton projet 👍.
