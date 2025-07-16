@@ -64,6 +64,11 @@ $domaines = getDomaine();
                         <label class="form-label">Salaire minimum (€)*</label>
                         <input type="number" name="salaire" class="form-control" required>
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Combien de jour avant l'expiration</label>
+                        <input type="number" name="interval" class="form-control" required>
+                    </div>
                     
                     <div class="mb-3">
                         <label class="form-label">Compétences requises*</label>

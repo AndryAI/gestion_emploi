@@ -57,24 +57,23 @@
                             Votre plateforme de confiance pour trouver l'emploi qui correspond à vos compétences
                         </p>
                         <div class="hero-search">
-                            <form class="row g-2">
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Mots-clés, compétences, postes...">
-                                </div>
-                                <div class="col-md-3">
-                                    <select class="form-select form-select-lg">
-                                        <option selected>Domaine</option>
-                                        <?php foreach($domaine as $dom) {?>
-                                            <option><?php echo $dom ['nom_domaine'] ?></option>
-                                        <?php } ?>
-                                    </select>
-                                </div>
-                                <div class="col-md-1">
-                                    <button type="submit" class="btn btn-primary btn-lg w-100">
-                                        <i class="bi bi-search"></i>
-                                    </button>
-                                </div>
-                            </form>
+                        <form class="row g-2" method="GET" action="resultats_recherche.php">
+                            <div class="col-md-12">
+                                <select class="form-select form-select-lg" name="domaine" required>
+                                    <option value="" selected disabled>Domaine que vous recherchez</option>
+                                    <?php foreach($domaine as $dom) { ?>
+                                        <option value="<?= htmlspecialchars($dom['nom_domaine']) ?>">
+                                            <?= htmlspecialchars($dom['nom_domaine']) ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-search"></i> Rechercher
+                                </button>
+                            </div>
+                        </form>
                         </div>
                     </div>
                     
@@ -138,9 +137,9 @@
         </div>
     </main>
     
-    <footer class="footer py-4">
+    <!-- <footer class="footer py-4"> -->
         <?php include('../inc/pages/footer.php') ?>
-    </footer>
+    <!-- </footer> -->
     
     <script src="../assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

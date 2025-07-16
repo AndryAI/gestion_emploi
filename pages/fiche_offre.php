@@ -9,7 +9,6 @@ if(isset($id_publication)){
     $publication = mysqli_fetch_assoc($query);
 }
 
-
 if(!$publication) {
     header("Location: index.php");
     exit();

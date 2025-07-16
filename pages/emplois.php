@@ -6,6 +6,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 $offres = getAllPublication();
+$domaine =  getDomaine();
+
 
 ?>
 <!DOCTYPE html>
@@ -29,25 +31,25 @@ $offres = getAllPublication();
             <p class="hero-subtitle mb-4">Parcourez toutes nos offres d'emploi disponibles et postulez en quelques clics</p>
             
             <!-- Formulaire de recherche -->
-            <form class="row g-3 justify-content-center">
-                <div class="col-md-5">
-                    <input type="text" class="form-control form-control-lg" placeholder="Mots-clés, compétences...">
+                <div class="hero-search">
+                        <form class="row g-2" method="GET" action="resultats_recherche.php">
+                            <div class="col-md-12">
+                                <select class="form-select form-select-lg" name="domaine" required>
+                                    <option value="" selected disabled>Domaine que vous recherchez</option>
+                                    <?php foreach($domaine as $dom) { ?>
+                                        <option value="<?= htmlspecialchars($dom['nom_domaine']) ?>">
+                                            <?= htmlspecialchars($dom['nom_domaine']) ?>
+                                        </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                            <div class="col-md-12 mt-2">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">
+                                    <i class="bi bi-search"></i> Rechercher
+                                </button>
+                            </div>
+                        </form>
                 </div>
-                <div class="col-md-3">
-                    <select class="form-select form-select-lg">
-                        <option selected>Tous les domaines</option>
-                        <option>Informatique</option>
-                        <option>Marketing</option>
-                        <option>Finance</option>
-                        <option>RH</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-primary btn-lg w-100">
-                        <i class="bi bi-search me-2"></i> Rechercher
-                    </button>
-                </div>
-            </form>
         </div>
         <!-- Filtres -->
         <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
